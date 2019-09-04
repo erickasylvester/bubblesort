@@ -9,17 +9,16 @@ function split(wholeArray) {
   }
 }
 
-function merge(first, second) {
+function merge(first, second, comparator = defaultComparator) {
   if (first.length === 0) { return second; }
   if (second.length === 0) { return first; }
   const mergedArray = [];
-
   while (first.length !== 0 || second.length !== 0) {
     if (first.length === 0) {
       return mergedArray.concat(second);
     } else if (second.length === 0) {
       return mergedArray.concat(first);
-    } else if (first[0] < second[0]) {
+    } else if (comparator(first[0],second[0])) {
       mergedArray.push(first.shift());
     } else {
       mergedArray.push(second.shift());
@@ -28,14 +27,22 @@ function merge(first, second) {
   return mergedArray;
 }
 
-function mergeSort(array) {
+function defaultComparator(a, b){
+  if(a < b) return true;
+  return false;
+}
+
+function mergeSort(array, comparator = defaultComparator) {
   if (array.length <= 1) {
     return array;
   } else {
     const arrays = split(array);
-    return merge(mergeSort(arrays[0]), mergeSort(arrays[1]));
+    return merge(mergeSort(arrays[0], comparator), mergeSort(arrays[1], comparator), comparator);
   }
 }
+
+
+
 
 
 

@@ -53,3 +53,18 @@ describe('Merge sort function', function(){
   });
 
 });
+
+describe('Merge sort function with custom comparator', function(){
+
+  function customComparator(a, b){
+    if(a > b) return true;
+    return false;
+  }
+
+  it('merge sorts both even and odd arrays', function() {
+    expect(mergeSort([4, 2, 1], customComparator)).toEqual( [4, 2, 1] );
+    expect(mergeSort([10, 2, 5, 1, 4, 19], customComparator)).toEqual( [19, 10, 5, 4, 2, 1]);
+  });
+
+});
+
