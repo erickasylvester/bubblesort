@@ -1,7 +1,25 @@
 
 
-function bubbleSort(array, ){
-    if(array.length <= 1){
+function bubbleSortRecursive(array, endPointer = array.length){
+    if(endPointer <= 1){
+        return array;
+    }
+    else{
+
+        for(let i = 1; i < endPointer;i ++){
+            if(array[i-1]> array[i]){
+                swap(i-1, i, array);
+            }
+        }
+        endPointer = endPointer -1;
+        return bubbleSortRecursive(array, endPointer);
+
+    }
+
+}
+
+function bubbleSort(array){
+    if( array.length<= 1){
         return array;
     }
     else{
@@ -17,23 +35,10 @@ function bubbleSort(array, ){
             endPointer--;
         }
         return array;
-
-        // let endPointer = array.length -1;
-        // let pointer = 0;
-        // while(pointer != endPointer){
-        //     for(let i = 1; i <= endPointer;i ++){
-        //         if(array[i-1]> array[i]){
-        //             swap(i-1, i, array);
-        //         }
-        //     }
-        //     endPointer--;
-        // }
-        // return array;
-
-
     }
 
 }
+
 
 function swap(index1, index2, array){
     let temp = array[index1];
